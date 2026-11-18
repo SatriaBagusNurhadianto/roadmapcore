@@ -12,8 +12,22 @@ import (
 	"strings"
 )
 
-// ExpectedWeeks adalah jumlah minggu dalam satu jalur pada format v1.
-const ExpectedWeeks = 12
+// TotalWeeks mengembalikan jumlah minggu dalam jalur.
+//
+// Panjang jalur bukan konstanta: dokumen sumber berisi 12 minggu (3 bulan),
+// sementara varian 5 bulan berisi 20. Semua batas minggu diambil dari sini.
+func (r Roadmap) TotalWeeks() int {
+	n := 0
+	for _, m := range r.Months {
+		n += len(m.Weeks)
+	}
+	return n
+}
+
+// TotalMonths mengembalikan jumlah bulan dalam jalur.
+func (r Roadmap) TotalMonths() int {
+	return len(r.Months)
+}
 
 // ValidIndicators adalah daftar indikator self-assessment yang diizinkan.
 var ValidIndicators = []string{"pemula", "menengah_awal", "di_atas_rata_rata"}
@@ -112,13 +126,20 @@ func (r Roadmap) Validate() error {
 		}
 	}
 
-	if total != ExpectedWeeks {
-		return fmt.Errorf("roadmap %s: total minggu %d, wajib %d", r.ID, total, ExpectedWeeks)
+	if total < 1 {
+		return fmt.Errorf("roadmap %s: jalur harus punya minimal 1 minggu", r.ID)
 	}
-	// Indeks minggu harus kontigu 1..ExpectedWeeks.
-	for i := 1; i <= ExpectedWeeks; i++ {
+	// Indeks bulan harus kontigu 1..len(Months).
+	for i := 1; i <= len(r.Months); i++ {
+		if !seenMonth[i] {
+			return fmt.Errorf("roadmap %s: month index %d hilang (indeks harus kontigu 1..%d)", r.ID, i, len(r.Months))
+		}
+	}
+	// Indeks minggu harus kontigu 1..total. Panjang jalur bebas (>= 1):
+	// 12 untuk dokumen sumber, 20 untuk varian 5 bulan.
+	for i := 1; i <= total; i++ {
 		if !seenWeek[i] {
-			return fmt.Errorf("roadmap %s: week index %d hilang (indeks harus kontigu 1..%d)", r.ID, i, ExpectedWeeks)
+			return fmt.Errorf("roadmap %s: week index %d hilang (indeks harus kontigu 1..%d)", r.ID, i, total)
 		}
 	}
 	return validateIndicators(r)
@@ -160,7 +181,7 @@ func validateIndicators(r Roadmap) error {
 
 // WeekIndices mengembalikan daftar indeks minggu terurut.
 func (r Roadmap) WeekIndices() []int {
-	idx := make([]int, 0, ExpectedWeeks)
+	idx := make([]int, 0, r.TotalWeeks())
 	for _, m := range r.Months {
 		for _, w := range m.Weeks {
 			idx = append(idx, w.Index)

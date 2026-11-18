@@ -121,8 +121,11 @@ Satu jalur = satu berkas `.yaml`. Validasi menolak field yang tidak dikenal
 | `sources[]`, `tips[]` | minggu | tidak dipakai; dokumen sumber meletakkan sources/tips di level jalur |
 | `self_assessment.indicators` | roadmap | harus `[pemula, menengah_awal, di_atas_rata_rata]` |
 
-Invariant: total minggu 12, indeks kontigu 1..12, `month.index` > 0 dan tidak
-duplikat, `week.index` tidak duplikat.
+Invariant: indeks `week` kontigu 1..N dan `month.index` kontigu 1..M, dengan
+N = jumlah minggu jalur dan M = jumlah bulan. Panjang jalur bebas (>= 1 minggu):
+dokumen sumber berisi 12 minggu (3 bulan), varian 5 bulan berisi 20 minggu (5
+bulan). `week.index` > 0, `month.index` > 0, `title` terisi, `topics` dan
+`harus_bisa` tidak kosong.
 
 Contoh bawaan: `roadmap/roadmaps/data-analyst.yaml` dan
 `roadmap/roadmaps/swe-javascript.yaml`, keduanya disalin dari dokumen sumber.

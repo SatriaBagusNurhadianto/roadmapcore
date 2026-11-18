@@ -47,7 +47,7 @@ func TestMiniProjectTransitions(t *testing.T) {
 
 func TestActiveWeekAndDoneWeeks(t *testing.T) {
 	p := &PathProgress{Weeks: map[string]*WeekState{}}
-	if got := p.ActiveWeek(); got != 1 {
+	if got := p.ActiveWeekUpTo(12); got != 1 {
 		t.Fatalf("ActiveWeek = %d, want 1", got)
 	}
 	now := time.Now().UTC()
@@ -56,17 +56,17 @@ func TestActiveWeekAndDoneWeeks(t *testing.T) {
 			t.Fatal(err)
 		}
 	}
-	if got := p.ActiveWeek(); got != 4 {
+	if got := p.ActiveWeekUpTo(12); got != 4 {
 		t.Fatalf("ActiveWeek = %d, want 4", got)
 	}
-	if got := p.DoneWeeks(); got != 3 {
+	if got := p.DoneWeeksUpTo(12); got != 3 {
 		t.Fatalf("DoneWeeks = %d, want 3", got)
 	}
 	// done -> in_progress: minggu aktif kembali 3
 	if err := p.SetWeekStatus(3, WeekInProgress, now); err != nil {
 		t.Fatal(err)
 	}
-	if got := p.ActiveWeek(); got != 3 {
+	if got := p.ActiveWeekUpTo(12); got != 3 {
 		t.Fatalf("ActiveWeek = %d, want 3", got)
 	}
 }

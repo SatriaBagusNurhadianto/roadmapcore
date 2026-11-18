@@ -81,9 +81,9 @@ months:
         title: Minggu 10
         topics: [Topik uji 10]
         tasks: [{title: Tugas uji 10, estimate_min: 30}]
-      - index: 11
-        title: Minggu 11
-        topics: [Topik uji 11]
-        tasks: [{title: Tugas uji 11, estimate_min: 30}]
+      - index: 13
+        title: Minggu 13
+        topics: [Topik uji 13]
+        tasks: [{title: Tugas uji 13, estimate_min: 30}]
 self_assessment:
   indicators: [pemula, menengah_awal, di_atas_rata_rata]

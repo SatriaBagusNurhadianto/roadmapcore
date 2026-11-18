@@ -3,6 +3,7 @@ package roadmap
 import (
 	"os"
 	"path/filepath"
+	"strconv"
 	"testing"
 )
 
@@ -14,8 +15,8 @@ func TestParseValid(t *testing.T) {
 	if r.ID != "contoh-jalur" {
 		t.Fatalf("ID = %q", r.ID)
 	}
-	if got := len(r.WeekIndices()); got != ExpectedWeeks {
-		t.Fatalf("jumlah minggu = %d, want %d", got, ExpectedWeeks)
+	if got := len(r.WeekIndices()); got != r.TotalWeeks() {
+		t.Fatalf("jumlah minggu = %d, want %d", got, r.TotalWeeks())
 	}
 	if w, ok := r.FindWeek(7); !ok || w.Title != "Minggu 7" {
 		t.Fatalf("FindWeek(7) = %+v, %v", w, ok)
@@ -41,7 +42,7 @@ func TestParseErrors(t *testing.T) {
 		file string
 	}{
 		{"id ilegal", "invalid_id.yaml"},
-		{"minggu 11 saja", "invalid_weeks.yaml"},
+		{"indeks minggu tidak kontigu", "invalid_weeks.yaml"},
 		{"minggu duplikat", "invalid_dup.yaml"},
 		{"estimasi nol", "invalid_estimate.yaml"},
 		{"indikator salah", "invalid_indicator.yaml"},
@@ -128,11 +129,68 @@ func TestRoadmapBawaanIsiLengkap(t *testing.T) {
 			}
 		}
 		// Setiap minggu punya topik dan kompetensi yang bisa dicek.
-		for i := 1; i <= ExpectedWeeks; i++ {
+		for i := 1; i <= r.TotalWeeks(); i++ {
 			w, _ := r.FindWeek(i)
 			if len(w.Topics) == 0 || len(w.HarusBisa) == 0 {
 				t.Fatalf("%s minggu %d: topics/harus_bisa kosong", r.ID, i)
 			}
 		}
+	}
+}
+
+// Panjang jalur bukan konstanta. Jalur 12 minggu (3 bulan) dan 20 minggu
+// (5 bulan) sama-sama sah; yang wajib adalah indeks bulan dan minggu kontigu.
+func TestValidatePanjangJalurBebas(t *testing.T) {
+	buat := func(totalMinggu int) Roadmap {
+		r := Roadmap{
+			ID:             "ujicoba",
+			Name:           "Jalur uji",
+			Description:    "uji panjang jalur",
+			Target:         "uji",
+			SelfAssessment: SelfAssessment{Indicators: ValidIndicators},
+		}
+		for m := 1; (m-1)*4 < totalMinggu; m++ {
+			mo := Month{Index: m, Title: "Bulan " + strconv.Itoa(m)}
+			for w := (m-1)*4 + 1; w <= m*4 && w <= totalMinggu; w++ {
+				mo.Weeks = append(mo.Weeks, Week{
+					Index:     w,
+					Title:     "Minggu " + strconv.Itoa(w),
+					Topics:    []string{"Topik"},
+					HarusBisa: []string{"Bisa"},
+				})
+			}
+			r.Months = append(r.Months, mo)
+		}
+		return r
+	}
+
+	for _, n := range []int{12, 20} {
+		r := buat(n)
+		if got := r.TotalWeeks(); got != n {
+			t.Fatalf("TotalWeeks = %d, want %d", got, n)
+		}
+		if got := r.TotalMonths(); got != (n+3)/4 {
+			t.Fatalf("TotalMonths = %d, want %d", got, (n+3)/4)
+		}
+		if err := r.Validate(); err != nil {
+			t.Fatalf("jalur %d minggu ditolak: %v", n, err)
+		}
+	}
+}
+
+// Indeks bulan yang bolong tetap ditolak.
+func TestValidateBulanTidakKontigu(t *testing.T) {
+	r := Roadmap{
+		ID:             "ujicoba",
+		Name:           "Jalur uji",
+		Description:    "uji",
+		Target:         "uji",
+		SelfAssessment: SelfAssessment{Indicators: ValidIndicators},
+	}
+	r.Months = append(r.Months, Month{Index: 2, Title: "Bulan 2", Weeks: []Week{
+		{Index: 1, Title: "Minggu 1", Topics: []string{"Topik"}, HarusBisa: []string{"Bisa"}},
+	}})
+	if err := r.Validate(); err == nil {
+		t.Fatal("bulan 2 tanpa bulan 1 seharusnya ditolak")
 	}
 }

@@ -20,9 +20,6 @@ import (
 // SchemaVersion adalah versi schema progress.json dan settings.json.
 const SchemaVersion = 1
 
-// ExpectedWeeks sejalan dengan roadmap.ExpectedWeeks.
-const ExpectedWeeks = 12
-
 // WeekStatus adalah status satu minggu.
 type WeekStatus string
 
@@ -386,10 +383,16 @@ func (p *PathProgress) NoteOf(index int) string {
 	return ""
 }
 
-// SetNote menyimpan catatan satu minggu. Indeks di luar 1..ExpectedWeeks ditolak.
-func (p *PathProgress) SetNote(index int, note string) error {
-	if index < 1 || index > ExpectedWeeks {
-		return fmt.Errorf("minggu %d di luar rentang 1..%d", index, ExpectedWeeks)
+// SetNote menyimpan catatan satu minggu. Indeks di luar 1..total ditolak.
+//
+// total adalah panjang jalur (rm.TotalWeeks()), bukan konstanta: jalur 3 bulan
+// punya 12 minggu, jalur 5 bulan punya 20.
+func (p *PathProgress) SetNote(index, total int, note string) error {
+	if total < 1 {
+		total = 1
+	}
+	if index < 1 || index > total {
+		return fmt.Errorf("minggu %d di luar rentang 1..%d", index, total)
 	}
 	if p.Weeks == nil {
 		p.Weeks = map[string]*WeekState{}
@@ -412,20 +415,26 @@ func (p *PathProgress) WeekStatusOf(index int) WeekStatus {
 	return WeekNotStarted
 }
 
-// ActiveWeek mengembalikan minggu pertama yang belum done.
-func (p *PathProgress) ActiveWeek() int {
-	for i := 1; i <= ExpectedWeeks; i++ {
+// ActiveWeekUpTo mengembalikan minggu pertama (1..total) yang belum done.
+func (p *PathProgress) ActiveWeekUpTo(total int) int {
+	if total < 1 {
+		total = 1
+	}
+	for i := 1; i <= total; i++ {
 		if p.WeekStatusOf(i) != WeekDone {
 			return i
 		}
 	}
-	return ExpectedWeeks
+	return total
 }
 
-// DoneWeeks menghitung minggu berstatus done.
-func (p *PathProgress) DoneWeeks() int {
+// DoneWeeksUpTo menghitung minggu berstatus done pada 1..total.
+func (p *PathProgress) DoneWeeksUpTo(total int) int {
+	if total < 1 {
+		return 0
+	}
 	n := 0
-	for i := 1; i <= ExpectedWeeks; i++ {
+	for i := 1; i <= total; i++ {
 		if p.WeekStatusOf(i) == WeekDone {
 			n++
 		}
