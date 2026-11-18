@@ -27,6 +27,8 @@ type Roadmap struct {
 	Description    string         `yaml:"description" json:"description"`
 	Target         string         `yaml:"target" json:"target"`
 	Rules          []string       `yaml:"rules" json:"rules"`
+	Sources        []string       `yaml:"sources" json:"sources"`
+	Tips           []string       `yaml:"tips" json:"tips"`
 	Months         []Month        `yaml:"months" json:"months"`
 	SelfAssessment SelfAssessment `yaml:"self_assessment" json:"self_assessment"`
 }
@@ -40,16 +42,17 @@ type Month struct {
 
 // Week adalah materi satu minggu.
 type Week struct {
-	Index        int      `yaml:"index" json:"index"`
-	Title        string   `yaml:"title" json:"title"`
-	Topics       []string `yaml:"topics" json:"topics"`
-	HarusBisa    []string `yaml:"harus_bisa" json:"harus_bisa"`
-	Tasks        []Task   `yaml:"tasks" json:"tasks"`
-	MiniProject  string   `yaml:"mini_project" json:"mini_project"`
-	PassCriteria []string `yaml:"pass_criteria" json:"pass_criteria"`
-	Bonus        []string `yaml:"bonus" json:"bonus"`
-	Sources      []string `yaml:"sources" json:"sources"`
-	Tips         []string `yaml:"tips" json:"tips"`
+	Index           int      `yaml:"index" json:"index"`
+	Title           string   `yaml:"title" json:"title"`
+	Topics          []string `yaml:"topics" json:"topics"`
+	HarusBisa       []string `yaml:"harus_bisa" json:"harus_bisa"`
+	Tasks           []Task   `yaml:"tasks" json:"tasks"`
+	MiniProject     string   `yaml:"mini_project" json:"mini_project"`
+	RequiredFeature []string `yaml:"required_features" json:"required_features"`
+	PassCriteria    []string `yaml:"pass_criteria" json:"pass_criteria"`
+	Bonus           []string `yaml:"bonus" json:"bonus"`
+	Sources         []string `yaml:"sources" json:"sources"`
+	Tips            []string `yaml:"tips" json:"tips"`
 }
 
 // Task adalah satu tugas dalam minggu.

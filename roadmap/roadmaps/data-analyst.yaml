@@ -1,0 +1,188 @@
+# Roadmap Data Analyst.
+#
+# Disalin dari dokumen sumber: "Roadmap Data Analyst" (Mini E-Book, Roadmap
+# 12 minggu + 3 mini project). Tidak ada materi yang dikarang atau diterjemah
+# bebas; tabel 12 minggu, tiga mini project, sumber belajar, dan tips mengikuti
+# dokumen sumber.
+#
+# Aturan penyusunan:
+#   topics        = kolom "Topik" pada tabel 12 minggu.
+#   harus_bisa    = kolom "Yang harus bisa", dipecah pada koma di luar tanda
+#                   kurung. Sel yang berisi titik dua diperlakukan sebagai satu
+#                   butir utuh agar tidak terpotong maknanya.
+#   mini_project / required_features / pass_criteria / bonus
+#                 = bagian "Mini Project Bulanan"; diletakkan pada minggu
+#                   terakhir bulan bersangkutan karena dokumen menempatkannya
+#                   sebagai tolok ukur akhir bulan.
+#   sources / tips = bagian 5 dokumen; sifatnya jalur-wide, dipindah ke level
+#                   roadmap (skema v1 hanya mengenal sources/tips per minggu).
+id: data-analyst
+name: Roadmap Data Analyst
+description: Dari Excel dan SQL sampai bisa bikin dashboard dan cerita dari data
+target: >-
+  Target 3 bulan: mahir Excel, SQL, Python (pandas) untuk analisis, bikin
+  visualisasi dan dashboard, serta punya satu project end-to-end yang bisa
+  dipajang di portofolio.
+rules:
+  - Fokus satu jalur dulu. Jangan loncat ke bidang lain sebelum mini project bulan itu selesai.
+  - Belajar sedikit tapi tiap hari lebih baik daripada maraton sekali seminggu. Target 1-2 jam per hari.
+  - "Setiap minggu: catat apa yang dipelajari (README atau catatan pribadi)."
+  - Kode atau hasil kerja selalu di-push ke GitHub supaya progres terlihat.
+  - Kalau macet lebih dari 1 jam, cari dulu (docs, Google, error message), baru tanya.
+sources:
+  - Kaggle (dataset gratis dan kursus singkat Pandas, SQL, Data Viz)
+  - Mode SQL Tutorial dan SQLBolt (latihan SQL interaktif)
+  - Dokumentasi pandas (pandas.pydata.org)
+  - Microsoft Learn (Power BI) atau Looker Studio Help
+  - "Buku: Storytelling with Data (Cole Nussbaumer Knaflic)"
+tips:
+  - Selalu mulai dari pertanyaan bisnis, baru pilih tools.
+  - Dokumentasikan keputusan cleaning data. Itu yang dinilai rekruter.
+  - Chart sederhana yang jelas lebih baik daripada chart rumit yang membingungkan.
+months:
+  - index: 1
+    title: "Bulan 1: Excel, Statistika, dan SQL"
+    weeks:
+      - index: 1
+        title: Minggu 1
+        topics: [Excel / Sheets]
+        harus_bisa:
+          - Formula (XLOOKUP, IF, SUMIFS)
+          - pivot table
+          - chart
+          - data cleaning dasar
+      - index: 2
+        title: Minggu 2
+        topics: [Statistika dasar]
+        harus_bisa:
+          - Mean
+          - median
+          - modus
+          - standar deviasi
+          - distribusi
+          - korelasi
+          - sampling
+      - index: 3
+        title: Minggu 3
+        topics: [SQL dasar]
+        harus_bisa:
+          - SELECT
+          - WHERE
+          - ORDER BY
+          - GROUP BY
+          - HAVING
+          - agregasi
+      - index: 4
+        title: Minggu 4
+        topics: [SQL menengah]
+        harus_bisa:
+          - JOIN
+          - subquery
+          - CTE
+          - window function dasar
+          - CASE WHEN
+        mini_project: Analisis Penjualan (Excel + SQL)
+        required_features:
+          - Dataset publik (misal dari Kaggle) dibersihkan di Excel/Sheets
+          - Minimal 5 pertanyaan bisnis dijawab dengan query SQL
+          - Pivot table dan 3 chart yang jelas
+          - Ringkasan temuan 1 halaman
+        pass_criteria:
+          - Semua fitur wajib berjalan
+          - Hasil ada di GitHub dengan README yang jelas
+          - Bisa menjelaskan tiap langkah analisis tanpa lihat tutorial
+        bonus:
+          - Hitung pertumbuhan bulanan dengan window function
+          - Rekomendasi tindakan berbasis data
+  - index: 2
+    title: "Bulan 2: Python dan Visualisasi"
+    weeks:
+      - index: 5
+        title: Minggu 5
+        topics: [Python dasar]
+        harus_bisa:
+          - Variabel
+          - fungsi
+          - list/dict
+          - loop
+          - baca file
+          - Jupyter Notebook
+      - index: 6
+        title: Minggu 6
+        topics: [pandas]
+        harus_bisa:
+          - DataFrame
+          - filter
+          - groupby
+          - merge
+          - handling missing value dan duplikat
+      - index: 7
+        title: Minggu 7
+        topics: [Visualisasi]
+        harus_bisa:
+          - matplotlib
+          - seaborn
+          - memilih jenis chart yang tepat
+      - index: 8
+        title: Minggu 8
+        topics: [EDA]
+        harus_bisa:
+          - "Exploratory data analysis: pola, outlier, hubungan antar variabel"
+        mini_project: EDA End-to-End (Python)
+        required_features:
+          - "Notebook rapi: judul, tujuan, langkah, kesimpulan"
+          - Data cleaning yang terdokumentasi (apa yang dibuang dan kenapa)
+          - Minimal 5 visualisasi dengan judul dan label jelas
+          - Minimal 3 insight tertulis
+        pass_criteria:
+          - Semua fitur wajib berjalan
+          - Hasil ada di GitHub dengan README yang jelas
+          - Bisa menjelaskan tiap langkah analisis tanpa lihat tutorial
+        bonus:
+          - Uji hipotesis sederhana (t-test atau korelasi)
+          - Publikasi notebook di GitHub atau Kaggle
+  - index: 3
+    title: "Bulan 3: Dashboard dan Portofolio"
+    weeks:
+      - index: 9
+        title: Minggu 9
+        topics: [BI tools]
+        harus_bisa:
+          - "Power BI atau Looker Studio (gratis): koneksi data, model, visual"
+      - index: 10
+        title: Minggu 10
+        topics: [Dashboard yang baik]
+        harus_bisa:
+          - KPI
+          - filter interaktif
+          - layout
+          - pemilihan warna
+          - hindari chart menyesatkan
+      - index: 11
+        title: Minggu 11
+        topics: [Data storytelling]
+        harus_bisa:
+          - "Menyusun alur: konteks, temuan, rekomendasi; presentasi hasil"
+      - index: 12
+        title: Minggu 12
+        topics: [Portofolio]
+        harus_bisa:
+          - Rapikan GitHub
+          - README
+          - tulis studi kasus
+          - siapkan CV
+        mini_project: Dashboard Interaktif + Studi Kasus
+        required_features:
+          - Dashboard interaktif dengan minimal 4 KPI dan 2 filter
+          - Data diambil dari SQL atau hasil olahan Python
+          - "Studi kasus tertulis: masalah, proses, temuan, rekomendasi"
+          - Semua file dan dokumentasi di GitHub
+        pass_criteria:
+          - Semua fitur wajib berjalan
+          - Hasil ada di GitHub dengan README yang jelas
+          - Bisa menjelaskan tiap langkah analisis tanpa lihat tutorial
+        bonus:
+          - Otomasi update data dengan script Python
+          - Presentasi 10 menit ke teman
+self_assessment:
+  indicators: [pemula, menengah_awal, di_atas_rata_rata]

@@ -1,17 +1,25 @@
 package roadmap
 
-import "embed"
+import (
+	"embed"
+	"fmt"
+	"io/fs"
+)
 
 // roadmaps berisi satu berkas YAML per jalur.
 //
-// Saat ini belum ada berkas roadmap asli di dalam repositori: konten roadmap
-// wajib diambil dari dokumen sumber (PDF) dan tidak boleh dibuat-buat.
-// Berkas README ini sengaja ada agar direktori embed tidak kosong.
+// Konten roadmap diambil dari dokumen sumber (roadmap PDF Data Analyst dan
+// SWE JavaScript) dan tidak dibuat-buat. Berkas README menjelaskan aturan
+// penyusunannya.
 //
 //go:embed all:roadmaps
 var embedded embed.FS
 
 // LoadBuiltin memuat roadmap yang di-embed ke binary (offline).
 func LoadBuiltin() ([]Roadmap, error) {
-	return LoadEmbedded(embedded)
+	sub, err := fs.Sub(embedded, "roadmaps")
+	if err != nil {
+		return nil, fmt.Errorf("embed roadmap: %w", err)
+	}
+	return LoadEmbedded(sub)
 }

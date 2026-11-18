@@ -102,6 +102,31 @@ Enum:
 Timestamp internal memakai RFC3339 UTC. Tanggal untuk checklist/streak memakai
 tanggal lokal `YYYY-MM-DD`.
 
+## Roadmap YAML
+
+Satu jalur = satu berkas `.yaml`. Validasi menolak field yang tidak dikenal
+(`KnownFields(true)`), jadi nama field di sini adalah kontrak.
+
+| Field | Level | Isi |
+|---|---|---|
+| `id`, `name`, `description`, `target` | roadmap | identitas jalur; `id` kebab-case kecil |
+| `rules` | roadmap | aturan main jalur |
+| `sources`, `tips` | roadmap | sumber belajar dan tips (jalur-wide) |
+| `months[]` | bulan | `index`, `title`, `weeks[]` |
+| `weeks[]` | minggu | `index`, `title`, `topics[]`, `harus_bisa[]`, `tasks[]` |
+| `mini_project` | minggu | nama proyek; dokumen sumber menempatkannya per bulan, dipakai pada minggu terakhir bulan itu |
+| `required_features[]` | minggu | fitur wajib mini project |
+| `pass_criteria[]` | minggu | syarat lulus mini project |
+| `bonus[]` | minggu | bonus opsional mini project |
+| `sources[]`, `tips[]` | minggu | tidak dipakai; dokumen sumber meletakkan sources/tips di level jalur |
+| `self_assessment.indicators` | roadmap | harus `[pemula, menengah_awal, di_atas_rata_rata]` |
+
+Invariant: total minggu 12, indeks kontigu 1..12, `month.index` > 0 dan tidak
+duplikat, `week.index` tidak duplikat.
+
+Contoh bawaan: `roadmap/roadmaps/data-analyst.yaml` dan
+`roadmap/roadmaps/swe-javascript.yaml`, keduanya disalin dari dokumen sumber.
+
 ## audit.jsonl
 
 Satu JSON per baris, append-only:

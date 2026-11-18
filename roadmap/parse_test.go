@@ -62,15 +62,24 @@ func TestParseEmpty(t *testing.T) {
 	}
 }
 
-func TestLoadBuiltinTanpaRoadmap(t *testing.T) {
-	// Direktori embed belum berisi YAML roadmap asli. Keadaan kosong bukan
-	// error: aplikasi tetap bisa memakai roadmap dari direktori data.
+func TestLoadBuiltinDuaRoadmap(t *testing.T) {
+	// Roadmap bawaan diambil dari dokumen sumber. Bila daftar ini berubah,
+	// ubah juga README dan docs/FORMAT.md.
 	list, err := LoadBuiltin()
 	if err != nil {
 		t.Fatalf("LoadBuiltin: %v", err)
 	}
-	if len(list) != 0 {
-		t.Fatalf("len = %d, want 0", len(list))
+	if len(list) != 2 {
+		t.Fatalf("len = %d, want 2", len(list))
+	}
+	ida := map[string]bool{}
+	for _, r := range list {
+		ida[r.ID] = true
+	}
+	for _, want := range []string{"data-analyst", "swe-javascript"} {
+		if !ida[want] {
+			t.Fatalf("roadmap %q tidak ada di bawaan", want)
+		}
 	}
 }
 
@@ -82,5 +91,48 @@ func TestLoadEmbeddedDariFSUji(t *testing.T) {
 	}
 	if len(list) != 1 {
 		t.Fatalf("len = %d, want 1", len(list))
+	}
+}
+
+func TestRoadmapBawaanIsiLengkap(t *testing.T) {
+	list, err := LoadBuiltin()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, r := range list {
+		if len(r.Rules) == 0 {
+			t.Fatalf("%s: rules kosong", r.ID)
+		}
+		if len(r.Sources) == 0 || len(r.Tips) == 0 {
+			t.Fatalf("%s: sources/tips kosong", r.ID)
+		}
+		if len(r.Months) != 3 {
+			t.Fatalf("%s: bulan = %d, want 3", r.ID, len(r.Months))
+		}
+		for _, m := range r.Months {
+			if len(m.Weeks) != 4 {
+				t.Fatalf("%s bulan %d: minggu = %d, want 4", r.ID, m.Index, len(m.Weeks))
+			}
+		}
+		// Mini project ada di minggu terakhir tiap bulan.
+		for _, idx := range []int{4, 8, 12} {
+			w, ok := r.FindWeek(idx)
+			if !ok {
+				t.Fatalf("%s: minggu %d hilang", r.ID, idx)
+			}
+			if w.MiniProject == "" {
+				t.Fatalf("%s minggu %d: mini_project kosong", r.ID, idx)
+			}
+			if len(w.RequiredFeature) == 0 || len(w.PassCriteria) == 0 || len(w.Bonus) == 0 {
+				t.Fatalf("%s minggu %d: fitur/syarat/bonus kosong", r.ID, idx)
+			}
+		}
+		// Setiap minggu punya topik dan kompetensi yang bisa dicek.
+		for i := 1; i <= ExpectedWeeks; i++ {
+			w, _ := r.FindWeek(i)
+			if len(w.Topics) == 0 || len(w.HarusBisa) == 0 {
+				t.Fatalf("%s minggu %d: topics/harus_bisa kosong", r.ID, i)
+			}
+		}
 	}
 }

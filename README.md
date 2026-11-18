@@ -11,8 +11,12 @@ Menyediakan:
 ## Status
 
 Model data, storage, locking, dan audit sudah diimplementasikan dan diuji.
-**Konten roadmap belum ada**: berkas YAML jalan akan ditambahkan di
-`roadmap/roadmaps/` begitu roadmap PDF sumber tersedia. Isi roadmap tidak dibuat-buat.
+
+Konten roadmap **sudah ada** dan diambil dari dokumen sumber: lihat
+`roadmap/roadmaps/data-analyst.yaml` (Roadmap Data Analyst) dan
+`roadmap/roadmaps/swe-javascript.yaml` (Roadmap Software Engineer JavaScript).
+Isi roadmap tidak dibuat-buat; aturan penyusunannya ada di
+`roadmap/roadmaps/README.md`.
 
 ## Pemakaian
 

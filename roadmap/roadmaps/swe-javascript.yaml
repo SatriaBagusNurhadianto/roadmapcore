@@ -1,0 +1,208 @@
+# Roadmap Software Engineer (JavaScript).
+#
+# Disalin dari dokumen sumber: "Roadmap Software Engineer (JavaScript)"
+# (Mini E-Book, Roadmap 12 minggu + 3 mini project). Tidak ada materi yang
+# dikarang atau diterjemah bebas; tabel 12 minggu, tiga mini project, sumber
+# belajar, dan tips mengikuti dokumen sumber.
+#
+# Aturan penyusunan:
+#   topics        = kolom "Topik" pada tabel 12 minggu.
+#   harus_bisa    = kolom "Yang harus bisa", dipecah pada koma di luar tanda
+#                   kurung.
+#   mini_project / required_features / pass_criteria / bonus
+#                 = bagian "Mini Project Bulanan"; diletakkan pada minggu
+#                   terakhir bulan bersangkutan karena dokumen menempatkannya
+#                   sebagai tolok ukur akhir bulan.
+#   sources / tips = bagian 5 dokumen; sifatnya jalur-wide, dipindah ke level
+#                   roadmap (skema v1 hanya mengenal sources/tips per minggu).
+#
+# Tabel "Cek Progres" di dokumen sumber (tidak punya field sendiri di skema v1,
+# disimpan di sini agar tidak hilang):
+#   Pemula          = Masih sering buka tutorial untuk hal dasar, project belum
+#                     selesai.
+#   Menengah awal   = Bisa menyelesaikan project bulanan sendiri dengan
+#                     sesekali cari docs.
+#   Di atas rata-rata = Ketiga project selesai, online, kode rapi, bisa
+#                     jelaskan alasan tiap keputusan.
+id: swe-javascript
+name: Roadmap Software Engineer (JavaScript)
+description: Dari nol sampai bisa bikin aplikasi web fullstack
+target: >-
+  Jalur ini cocok buat kamu yang pengen bikin aplikasi web dan produk digital.
+  Bahasa utamanya JavaScript, karena bisa dipakai di frontend (browser) dan
+  backend (Node.js). Target 3 bulan: paham Git, HTML/CSS, JavaScript, React,
+  dasar struktur data dan algoritma, serta bisa deploy satu aplikasi fullstack
+  kecil. Itu sudah level di atas rata-rata untuk pemula.
+rules:
+  - Fokus satu jalur dulu. Jangan loncat ke bidang lain sebelum mini project bulan itu selesai.
+  - Belajar sedikit tapi tiap hari lebih baik daripada maraton sekali seminggu. Target 1-2 jam per hari.
+  - "Setiap minggu: catat apa yang dipelajari (README atau catatan pribadi)."
+  - Kode atau hasil kerja selalu di-push ke GitHub supaya progres terlihat.
+  - Kalau macet lebih dari 1 jam, cari dulu (docs, Google, error message), baru tanya.
+sources:
+  - MDN Web Docs (referensi HTML, CSS, JavaScript)
+  - freeCodeCamp dan The Odin Project (kurikulum gratis)
+  - javascript.info (JavaScript mendalam)
+  - roadmap.sh/frontend dan roadmap.sh/nodejs
+  - React docs resmi (react.dev)
+tips:
+  - Ngoding sendiri, jangan cuma nonton tutorial.
+  - Jangan pindah framework sebelum paham JavaScript dasarnya.
+  - Satu project yang selesai lebih berharga daripada lima yang setengah jadi.
+months:
+  - index: 1
+    title: "Bulan 1: Fondasi Web"
+    weeks:
+      - index: 1
+        title: Minggu 1
+        topics: [Git dan GitHub]
+        harus_bisa:
+          - init
+          - add
+          - commit
+          - branch
+          - merge
+          - push
+          - bikin pull request
+      - index: 2
+        title: Minggu 2
+        topics: [HTML dan CSS]
+        harus_bisa:
+          - Semantic HTML
+          - flexbox
+          - grid
+          - layout responsive
+      - index: 3
+        title: Minggu 3
+        topics: [JavaScript dasar]
+        harus_bisa:
+          - Variabel
+          - fungsi
+          - array
+          - object
+          - loop
+          - manipulasi DOM
+          - event
+      - index: 4
+        title: Minggu 4
+        topics: [JavaScript lanjut]
+        harus_bisa:
+          - ES6+
+          - async/await
+          - fetch API
+          - error handling
+          - JSON
+        mini_project: Aplikasi Cuaca / To-Do (Vanilla JS)
+        required_features:
+          - Layout responsive (HP dan laptop)
+          - Ambil data dari API publik (misal cuaca atau kutipan)
+          - Minimal 1 fitur interaktif (cari kota, tambah/hapus tugas)
+          - Penanganan error (kota tidak ditemukan, internet mati)
+        pass_criteria:
+          - Semua fitur wajib berjalan
+          - Kode ada di GitHub dengan README yang jelas
+          - Bisa menjelaskan tiap bagian kode tanpa lihat tutorial
+        bonus:
+          - Mode gelap
+          - Simpan data di localStorage
+  - index: 2
+    title: "Bulan 2: React dan Algoritma"
+    weeks:
+      - index: 5
+        title: Minggu 5
+        topics: [React dasar]
+        harus_bisa:
+          - Komponen
+          - props
+          - state
+          - render list
+          - event
+      - index: 6
+        title: Minggu 6
+        topics: [React hooks dan routing]
+        harus_bisa:
+          - useState
+          - useEffect
+          - React Router
+          - struktur folder
+      - index: 7
+        title: Minggu 7
+        topics: [Struktur data dan algoritma]
+        harus_bisa:
+          - Array
+          - hashmap
+          - stack
+          - queue
+          - sorting
+          - searching
+          - Big-O dasar
+      - index: 8
+        title: Minggu 8
+        topics: [Form dan data fetching]
+        harus_bisa:
+          - Controlled form
+          - validasi
+          - loading dan error state
+        mini_project: Dashboard / Pencarian Film (React)
+        required_features:
+          - Minimal 3 halaman dengan routing
+          - Pencarian dan filter data dari API
+          - Loading dan error state
+          - Kode dipecah jadi komponen yang rapi
+        pass_criteria:
+          - Semua fitur wajib berjalan
+          - Kode ada di GitHub dengan README yang jelas
+          - Bisa menjelaskan tiap bagian kode tanpa lihat tutorial
+        bonus:
+          - Favorit tersimpan di localStorage
+          - Deploy ke Vercel atau Netlify
+  - index: 3
+    title: "Bulan 3: Fullstack dan Deploy"
+    weeks:
+      - index: 9
+        title: Minggu 9
+        topics: [TypeScript dasar]
+        harus_bisa:
+          - Tipe
+          - interface
+          - generic sederhana
+          - pakai di React
+      - index: 10
+        title: Minggu 10
+        topics: [Node.js dan Express]
+        harus_bisa:
+          - Routing
+          - middleware
+          - REST API
+          - koneksi database
+      - index: 11
+        title: Minggu 11
+        topics: [Testing dan clean code]
+        harus_bisa:
+          - Unit test (Vitest/Jest)
+          - penamaan
+          - refactor
+          - linting
+      - index: 12
+        title: Minggu 12
+        topics: [Deploy dan portofolio]
+        harus_bisa:
+          - Environment variable
+          - deploy
+          - README bagus
+          - rapikan GitHub
+        mini_project: Aplikasi Catatan / Blog Fullstack
+        required_features:
+          - Frontend React, backend Express, database (SQLite/PostgreSQL/MongoDB)
+          - CRUD lengkap
+          - Login sederhana
+          - Online di internet dan README menjelaskan cara jalankan
+        pass_criteria:
+          - Semua fitur wajib berjalan
+          - Kode ada di GitHub dengan README yang jelas
+          - Bisa menjelaskan tiap bagian kode tanpa lihat tutorial
+        bonus:
+          - Unit test untuk fungsi penting
+          - CI sederhana dengan GitHub Actions
+self_assessment:
+  indicators: [pemula, menengah_awal, di_atas_rata_rata]
