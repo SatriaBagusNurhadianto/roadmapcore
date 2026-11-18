@@ -5,6 +5,8 @@ Module Go bersama untuk **Roadmap Suite** (Trace Learn + Remind-Me-Learn).
 Menyediakan:
 
 - `roadmap` — skema + parser + validator roadmap YAML (di-embed ke binary).
+  Panjang jalur bebas (>= 1 minggu); `Roadmap.TotalWeeks()` dipakai sebagai
+  batas indeks, bukan angka keras.
 - `progress` — model progres, cross-process lock, atomic write, backup, migrasi,
   dan audit log hash-chain.
 

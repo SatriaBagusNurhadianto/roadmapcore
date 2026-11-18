@@ -114,7 +114,7 @@ Satu jalur = satu berkas `.yaml`. Validasi menolak field yang tidak dikenal
 | `sources`, `tips` | roadmap | sumber belajar dan tips (jalur-wide) |
 | `months[]` | bulan | `index`, `title`, `weeks[]` |
 | `weeks[]` | minggu | `index`, `title`, `topics[]`, `harus_bisa[]`, `tasks[]` |
-| `mini_project` | minggu | nama proyek; dokumen sumber menempatkannya per bulan, dipakai pada minggu terakhir bulan itu |
+| `mini_project` | minggu | nama proyek; dokumen sumber menempatkannya per bulan, dipakai pada minggu terakhir tiap blok proyek |
 | `required_features[]` | minggu | fitur wajib mini project |
 | `pass_criteria[]` | minggu | syarat lulus mini project |
 | `bonus[]` | minggu | bonus opsional mini project |

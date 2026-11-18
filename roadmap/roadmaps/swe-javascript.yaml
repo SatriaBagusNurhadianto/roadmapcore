@@ -2,17 +2,30 @@
 #
 # Disalin dari dokumen sumber: "Roadmap Software Engineer (JavaScript)"
 # (Mini E-Book, Roadmap 12 minggu + 3 mini project). Tidak ada materi yang
-# dikarang atau diterjemah bebas; tabel 12 minggu, tiga mini project, sumber
+# dikarang atau diterjemah bebas; tabel minggu, tiga mini project, sumber
 # belajar, dan tips mengikuti dokumen sumber.
 #
+# Penjadwalan 5 bulan (20 minggu):
+#   Dokumen sumber memadatkan materi ini dalam 12 minggu. Varian ini menyebar
+#   ulang MATERI YANG SAMA ke 20 minggu (5 bulan x 4 minggu) supaya beban per
+#   minggu turun dari rata-rata 4,8 butir menjadi 2,9 butir. Tidak ada materi
+#   yang ditambah atau dihapus; urutan topik dan isi butir mengikuti dokumen.
+#   Topik sumber yang butirnya banyak dipakai pada dua minggu (mis. Git dan
+#   GitHub pada minggu 1-2).
+#
+#   Tiga mini project diposisikan sebagai tolok ukur tiap blok:
+#     Proyek 1 (Aplikasi Cuaca / To-Do)   -> akhir minggu 7  (~hari ke-49)
+#     Proyek 2 (Dashboard / Pencarian)   -> akhir minggu 14 (~hari ke-98)
+#     Proyek 3 (Aplikasi Catatan / Blog)  -> akhir minggu 20 (~hari ke-140)
+#   Jarak antar proyek 42-49 hari (kurang lebih 1,5 bulan).
+#
 # Aturan penyusunan:
-#   topics        = kolom "Topik" pada tabel 12 minggu.
+#   topics        = kolom "Topik" pada tabel dokumen sumber.
 #   harus_bisa    = kolom "Yang harus bisa", dipecah pada koma di luar tanda
 #                   kurung.
 #   mini_project / required_features / pass_criteria / bonus
-#                 = bagian "Mini Project Bulanan"; diletakkan pada minggu
-#                   terakhir bulan bersangkutan karena dokumen menempatkannya
-#                   sebagai tolok ukur akhir bulan.
+#                 = bagian "Mini Project Bulanan", diletakkan pada minggu
+#                   terakhir tiap blok proyek.
 #   sources / tips = bagian 5 dokumen; sifatnya jalur-wide, dipindah ke level
 #                   roadmap (skema v1 hanya mengenal sources/tips per minggu).
 #
@@ -30,7 +43,7 @@ description: Dari nol sampai bisa bikin aplikasi web fullstack
 target: >-
   Jalur ini cocok buat kamu yang pengen bikin aplikasi web dan produk digital.
   Bahasa utamanya JavaScript, karena bisa dipakai di frontend (browser) dan
-  backend (Node.js). Target 3 bulan: paham Git, HTML/CSS, JavaScript, React,
+  backend (Node.js). Target 5 bulan: paham Git, HTML/CSS, JavaScript, React,
   dasar struktur data dan algoritma, serta bisa deploy satu aplikasi fullstack
   kecil. Itu sudah level di atas rata-rata untuk pemula.
 rules:
@@ -61,35 +74,50 @@ months:
           - add
           - commit
           - branch
+      - index: 2
+        title: Minggu 2
+        topics: [Git dan GitHub]
+        harus_bisa:
           - merge
           - push
           - bikin pull request
-      - index: 2
-        title: Minggu 2
+      - index: 3
+        title: Minggu 3
         topics: [HTML dan CSS]
         harus_bisa:
           - Semantic HTML
           - flexbox
           - grid
           - layout responsive
-      - index: 3
-        title: Minggu 3
+      - index: 4
+        title: Minggu 4
         topics: [JavaScript dasar]
         harus_bisa:
           - Variabel
           - fungsi
           - array
           - object
+  - index: 2
+    title: "Bulan 2: JavaScript Lanjut"
+    weeks:
+      - index: 5
+        title: Minggu 5
+        topics: [JavaScript dasar]
+        harus_bisa:
           - loop
           - manipulasi DOM
           - event
-      - index: 4
-        title: Minggu 4
+      - index: 6
+        title: Minggu 6
         topics: [JavaScript lanjut]
         harus_bisa:
           - ES6+
           - async/await
           - fetch API
+      - index: 7
+        title: Minggu 7
+        topics: [JavaScript lanjut]
+        harus_bisa:
           - error handling
           - JSON
         mini_project: Aplikasi Cuaca / To-Do (Vanilla JS)
@@ -105,39 +133,54 @@ months:
         bonus:
           - Mode gelap
           - Simpan data di localStorage
-  - index: 2
-    title: "Bulan 2: React dan Algoritma"
-    weeks:
-      - index: 5
-        title: Minggu 5
+      - index: 8
+        title: Minggu 8
         topics: [React dasar]
         harus_bisa:
           - Komponen
           - props
           - state
+  - index: 3
+    title: "Bulan 3: React dan Algoritma"
+    weeks:
+      - index: 9
+        title: Minggu 9
+        topics: [React dasar]
+        harus_bisa:
           - render list
           - event
-      - index: 6
-        title: Minggu 6
+      - index: 10
+        title: Minggu 10
         topics: [React hooks dan routing]
         harus_bisa:
           - useState
           - useEffect
+      - index: 11
+        title: Minggu 11
+        topics: [React hooks dan routing]
+        harus_bisa:
           - React Router
           - struktur folder
-      - index: 7
-        title: Minggu 7
+      - index: 12
+        title: Minggu 12
         topics: [Struktur data dan algoritma]
         harus_bisa:
           - Array
           - hashmap
           - stack
           - queue
+  - index: 4
+    title: "Bulan 4: Form dan TypeScript"
+    weeks:
+      - index: 13
+        title: Minggu 13
+        topics: [Struktur data dan algoritma]
+        harus_bisa:
           - sorting
           - searching
           - Big-O dasar
-      - index: 8
-        title: Minggu 8
+      - index: 14
+        title: Minggu 14
         topics: [Form dan data fetching]
         harus_bisa:
           - Controlled form
@@ -156,35 +199,43 @@ months:
         bonus:
           - Favorit tersimpan di localStorage
           - Deploy ke Vercel atau Netlify
-  - index: 3
-    title: "Bulan 3: Fullstack dan Deploy"
-    weeks:
-      - index: 9
-        title: Minggu 9
+      - index: 15
+        title: Minggu 15
         topics: [TypeScript dasar]
         harus_bisa:
           - Tipe
           - interface
+      - index: 16
+        title: Minggu 16
+        topics: [TypeScript dasar]
+        harus_bisa:
           - generic sederhana
           - pakai di React
-      - index: 10
-        title: Minggu 10
+  - index: 5
+    title: "Bulan 5: Fullstack dan Deploy"
+    weeks:
+      - index: 17
+        title: Minggu 17
         topics: [Node.js dan Express]
         harus_bisa:
           - Routing
           - middleware
+      - index: 18
+        title: Minggu 18
+        topics: [Node.js dan Express]
+        harus_bisa:
           - REST API
           - koneksi database
-      - index: 11
-        title: Minggu 11
+      - index: 19
+        title: Minggu 19
         topics: [Testing dan clean code]
         harus_bisa:
           - Unit test (Vitest/Jest)
           - penamaan
           - refactor
           - linting
-      - index: 12
-        title: Minggu 12
+      - index: 20
+        title: Minggu 20
         topics: [Deploy dan portofolio]
         harus_bisa:
           - Environment variable

@@ -107,16 +107,20 @@ func TestRoadmapBawaanIsiLengkap(t *testing.T) {
 		if len(r.Sources) == 0 || len(r.Tips) == 0 {
 			t.Fatalf("%s: sources/tips kosong", r.ID)
 		}
-		if len(r.Months) != 3 {
-			t.Fatalf("%s: bulan = %d, want 3", r.ID, len(r.Months))
+		// Varian 5 bulan: 5 bulan x 4 minggu = 20 minggu.
+		if len(r.Months) != 5 {
+			t.Fatalf("%s: bulan = %d, want 5", r.ID, len(r.Months))
 		}
 		for _, m := range r.Months {
 			if len(m.Weeks) != 4 {
 				t.Fatalf("%s bulan %d: minggu = %d, want 4", r.ID, m.Index, len(m.Weeks))
 			}
 		}
-		// Mini project ada di minggu terakhir tiap bulan.
-		for _, idx := range []int{4, 8, 12} {
+		if got := r.TotalWeeks(); got != 20 {
+			t.Fatalf("%s: total minggu = %d, want 20", r.ID, got)
+		}
+		// Mini project ada di minggu terakhir tiap blok proyek (7, 14, 20).
+		for _, idx := range []int{7, 14, 20} {
 			w, ok := r.FindWeek(idx)
 			if !ok {
 				t.Fatalf("%s: minggu %d hilang", r.ID, idx)
@@ -192,5 +196,30 @@ func TestValidateBulanTidakKontigu(t *testing.T) {
 	}})
 	if err := r.Validate(); err == nil {
 		t.Fatal("bulan 2 tanpa bulan 1 seharusnya ditolak")
+	}
+}
+
+// Jumlah butir mengikuti dokumen sumber. Menyebar ulang ke 20 minggu tidak
+// boleh menambah atau menghapus materi, jadi total ini dipakai sebagai penjaga.
+func TestRoadmapBawaanJumlahButir(t *testing.T) {
+	want := map[string]int{"swe-javascript": 58, "data-analyst": 48}
+	list, err := LoadBuiltin()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, r := range list {
+		n := 0
+		for _, m := range r.Months {
+			for _, w := range m.Weeks {
+				if len(w.Tasks) > 0 {
+					n += len(w.Tasks)
+				} else {
+					n += len(w.HarusBisa)
+				}
+			}
+		}
+		if n != want[r.ID] {
+			t.Fatalf("%s: butir = %d, want %d", r.ID, n, want[r.ID])
+		}
 	}
 }
