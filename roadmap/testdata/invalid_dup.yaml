@@ -1,0 +1,93 @@
+id: contoh-jalur
+name: Contoh Jalur (data uji)
+description: Jalur sintetis untuk menguji parser dan validator. Bukan roadmap asli.
+target: Membuktikan parser dan validator berjalan.
+rules:
+  - Patuhi aturan yang berlaku.
+months:
+  - index: 1
+    title: Bulan 1
+    weeks:
+      - index: 1
+        title: Minggu 1
+        topics: [Topik uji 1]
+        harus_bisa: [Menguji parser]
+        tasks:
+          - title: Tugas uji 1
+            estimate_min: 30
+        mini_project: Proyek uji 1
+        pass_criteria: [Lulus uji]
+        bonus: [Bonus uji]
+        sources: [Sumber uji]
+        tips: [Tips uji]
+      - index: 2
+        title: Minggu 2
+        topics: [Topik uji 2]
+        harus_bisa: [Menguji parser]
+        tasks:
+          - title: Tugas uji 2
+            estimate_min: 45
+        mini_project: Proyek uji 2
+        pass_criteria: [Lulus uji]
+        bonus: [Bonus uji]
+        sources: [Sumber uji]
+        tips: [Tips uji]
+      - index: 3
+        title: Minggu 3
+        topics: [Topik uji 3]
+        harus_bisa: [Menguji parser]
+        tasks:
+          - title: Tugas uji 3
+            estimate_min: 60
+        mini_project: Proyek uji 3
+        pass_criteria: [Lulus uji]
+        bonus: [Bonus uji]
+        sources: [Sumber uji]
+        tips: [Tips uji]
+  - index: 2
+    title: Bulan 2
+    weeks:
+      - index: 4
+        title: Minggu 4
+        topics: [Topik uji 4]
+        tasks: [{title: Tugas uji 4, estimate_min: 30}]
+      - index: 5
+        title: Minggu 5
+        topics: [Topik uji 5]
+        tasks: [{title: Tugas uji 5, estimate_min: 30}]
+      - index: 6
+        title: Minggu 6
+        topics: [Topik uji 6]
+        tasks: [{title: Tugas uji 6, estimate_min: 30}]
+  - index: 3
+    title: Bulan 3
+    weeks:
+      - index: 7
+        title: Minggu 7
+        topics: [Topik uji 7]
+        tasks: [{title: Tugas uji 7, estimate_min: 30}]
+      - index: 8
+        title: Minggu 8
+        topics: [Topik uji 8]
+        tasks: [{title: Tugas uji 8, estimate_min: 30}]
+      - index: 9
+        title: Minggu 9
+        topics: [Topik uji 9]
+        tasks: [{title: Tugas uji 9, estimate_min: 30}]
+  - index: 4
+    title: Bulan 4
+    weeks:
+      - index: 10
+        title: Minggu 10
+        topics: [Topik uji 10]
+        tasks: [{title: Tugas uji 10, estimate_min: 30}]
+      - index: 11
+        title: Minggu 11
+        topics: [Topik uji 11]
+        tasks: [{title: Tugas uji 11, estimate_min: 30}]
+      - index: 11
+        title: Minggu 12
+        topics: [Topik uji 12]
+        tasks: [{title: Tugas uji 12, estimate_min: 30}]
+self_assessment:
+  indicators: [pemula, menengah_awal, di_atas_rata_rata]
